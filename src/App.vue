@@ -1,4 +1,6 @@
 <script>
+
+import { store } from './data/store.js'
 export default {
   name: 'Boolflix',
 };
