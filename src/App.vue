@@ -10,4 +10,5 @@ export default {
 
 <style lang="scss">
 @use './assets/scss/style.scss'
+// scss in app
 </style>
