@@ -8,7 +8,10 @@ export default {
 </script>
 
 <template>
-    <SearchInput />
+    <header>
+        <img src="../assets/" alt="">
+        <SearchInput />
+    </header>
 </template>
 
 <style scoped></style>

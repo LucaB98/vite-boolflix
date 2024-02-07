@@ -1,0 +1,1 @@
+export const ApiUri = 'https://api.themoviedb.org/3/search/';
