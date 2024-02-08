@@ -45,7 +45,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader @read-submit="searchMovies" @term-changed="setTitleFilter" />
+  <AppHeader @read-submit="searchProductions" @term-changed="setTitleFilter" />
 
   <main id="main" class="container">
     <ListCard />
