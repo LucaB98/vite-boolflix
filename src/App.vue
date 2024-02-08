@@ -1,33 +1,53 @@
 <script>
-import { ApiUri } from './data/data.js'
+import { Api } from './data/data.js'
 import { store } from './data/store.js';
 import AppHeader from './components/AppHeader.vue';
-import FirstTitle from './components/FirstTitle.vue';
+
 import ListCard from './components/ListCard.vue';
 import axios from 'axios';
-const movies = 'movie?query=spiderman&api_key=4003007d0853483950963e3e1e4c59c0';
-const series = 'tv?query=pippo&api_key=4003007d0853483950963e3e1e4c59c0';
+
 
 export default {
   name: 'Boolflix',
-  components: { AppHeader, FirstTitle, ListCard },
-  created() {
-    axios.get(ApiUri + movies).then(res => {
-      store.movies = res.data.results
-    }),
-      axios.get(ApiUri + series).then(res => {
-        store.series = res.data.results
+  components: { AppHeader, ListCard },
+  methods: {
+    setTitleFilter(term) {
+      store.filter = term;
+    },
+    searchProductions() {
+      if (!store.filter) {
+        store.movies = [];
+        store.series = [];
+        return;
+      }
+
+      this.fetchApi("search/movie", 'movies');
+      this.fetchApi("search/tv", 'series');
+
+    },
+    fetchApi(endpoint, collection) {
+      const { baseUri, language, apiKey } = Api
+
+      const params = {
+        query: store.filter,
+        api_key: apiKey,
+        language
+      }
+      axios.get(`${baseUri}/${endpoint}`, { params }).then(res => {
+        store[collection] = res.data.results
+      }).catch(err => {
+        console.error(err)
       })
+    }
   }
 }
 
 </script>
 
 <template>
-  <AppHeader />
+  <AppHeader @read-submit="searchMovies" @term-changed="setTitleFilter" />
 
   <main id="main" class="container">
-    <FirstTitle />
     <ListCard />
   </main>
 </template>
