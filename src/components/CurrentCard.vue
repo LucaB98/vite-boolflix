@@ -1,4 +1,6 @@
 <script>
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
 
 
 export default {
@@ -23,15 +25,22 @@ export default {
             const url = new URL(`../assets/img/${this.lang}.png`, import.meta.url);
             return url.href;
         },
-
+        vote() {
+            return Math.ceil(this.voteAverage / 2);
+        }
+    },
+    components: { FontAwesomeIcon },
+    methods: {
+        iconStyle(n) {
+            return n <= this.vote ? 'fas' : 'far';
+        }
     }
-
 };
 </script>
 
 <template>
     <div class="current-card">
-        <img :src="imageuri + this.posterPath" :alt="title" class="img-fluid">
+        <img :src="this.imageuri + this.posterPath" :alt="title" class="img-fluid">
         <ul>
             <li>{{ title }}</li>
             <li>{{ originalTitle }}</li>
@@ -39,13 +48,24 @@ export default {
                 <img v-if="hasFlag" :src="flagSrc" :alt="lang">
                 <span v-else>{{ lang }}</span>
             </li>
-            <li>{{ voteAverage }}</li>
+            <li>
+                <FontAwesomeIcon v-for="n in 5" :key="n" :icon="[iconStyle(n), 'star']" />
+            </li>
         </ul>
     </div>
 </template>
 
 <style scoped>
+.current-card {
+    color: white;
+}
+
+.fa-star {
+    color: white;
+}
+
 .current-card img {
     border-radius: 10px;
+
 }
 </style>

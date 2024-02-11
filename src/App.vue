@@ -39,7 +39,7 @@ export default {
             id: p.id,
             title: p.title || p.name,
             originalTitle: p.original_title || p.original_name,
-            voteAverage: p.average_vote,
+            voteAverage: p.vote_average,
             lang: p.original_language,
             posterPath: p.poster_path,
           }
