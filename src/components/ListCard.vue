@@ -1,5 +1,5 @@
 <script>
-import CurrentCard from './currentCard.vue';
+import CurrentCard from './CurrentCard.vue';
 import { store } from '../data/store.js';
 
 export default {
